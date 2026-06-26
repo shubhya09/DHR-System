@@ -1,8 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
 import { createServer } from 'http';
@@ -15,9 +13,6 @@ import chatRoutes from './server/routes/chat.js';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 const httpServer = createServer(app);
 
@@ -28,7 +23,6 @@ const io = new Server(httpServer, {
   }
 });
 
-// Render provides PORT automatically
 const PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -71,7 +65,7 @@ const connectDB = async () => {
 
 connectDB();
 
-// Routes
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/patient', patientRoutes);
 app.use('/api/doctor', doctorRoutes);
@@ -87,15 +81,6 @@ app.get('/api/health', (req, res) => {
         : 'disconnected'
   });
 });
-
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  });
-}
 
 // Start Server
 httpServer.listen(PORT, () => {
