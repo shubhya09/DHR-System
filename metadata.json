@@ -1,0 +1,5 @@
+{
+  "name": "Decentralized Healthcare Record Management System",
+  "description": "A secure MERN-Stack based healthcare platform for managing medical records, appointments, and data integrity using blockchain hashing.",
+  "requestFramePermissions": []
+}

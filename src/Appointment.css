@@ -1,0 +1,260 @@
+.Appnmnt-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 20px 30px;
+  box-sizing: border-box;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.doctor-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eef2f7;
+}
+
+.doctor-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 0;
+  display: block;
+  border: 4px solid #eafaf7;
+}
+
+.doctor-card h3 {
+  font-size: 28px;
+  text-align: center;
+  color: #1f2d3d;
+}
+
+.doctor-card p {
+  text-align: center;
+  word-break: break-word;
+}
+
+.btn {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: #16d6b0;
+  color: #000;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #10c4a0;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d7dce3;
+  border-radius: 12px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.A-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #1f2d3d;
+  margin-top: 0;
+}
+
+body {
+  background: #f8fafc;
+}
+
+.modal-A-card {
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.review-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+@media (max-width: 992px) {
+  .Appnmnt-container {
+    padding: 90px 16px 24px;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .doctor-card {
+    padding: 20px;
+  }
+
+  .doctor-card h3 {
+    font-size: 24px;
+  }
+
+  .review-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .Appnmnt-container {
+    padding: 85px 12px 20px;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .doctor-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .doctor-card img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .doctor-card h3 {
+    font-size: 22px;
+  }
+
+  .doctor-card p {
+    font-size: 14px;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .A-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .review-summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Appnmnt-container {
+    padding: 80px 10px 16px;
+  }
+
+  .doctor-card {
+    padding: 16px;
+  }
+
+  .doctor-card h3 {
+    font-size: 20px;
+  }
+
+  .doctor-card img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .A-card {
+    padding: 14px;
+  }
+
+  .review-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-card div[style*="display: flex"][style*="flex-direction: column"] {
+    width: 100%;
+  }
+
+  .doctor-card div[style*="display: flex"][style*="gap: 0.5rem"] {
+    width: 100%;
+  }
+
+  .A-card div[style*="justify-content: space-between"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+
+  .A-card div[style*="display: flex"][style*="gap: 1rem"] {
+    flex-direction: column !important;
+  }
+
+  .A-card div[style*="display: flex"][style*="gap: 0.2rem"] {
+    flex-wrap: wrap !important;
+  }
+
+  .A-card div[style*="display: grid"][style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .A-card div[style*="display: grid"][style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+}
