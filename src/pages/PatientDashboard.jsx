@@ -32,7 +32,7 @@ const PatientDashboard = () => {
 
   const fetchUnreadCounts = async () => {
     try {
-      const res = await axios.get('/api/chat/unread-counts', {
+      const res = await axios.get('https://dhr-system.onrender.com/api/chat/unread-counts', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const counts = {};
@@ -50,10 +50,10 @@ const PatientDashboard = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       try {
         const [apptsRes, recordsRes, permsRes, reqsRes] = await Promise.all([
-          axios.get('/api/patient/appointments', config),
-          axios.get('/api/patient/records', config),
-          axios.get('/api/patient/permissions', config),
-          axios.get('/api/patient/requests', config)
+          axios.get('https://dhr-system.onrender.com/api/patient/appointments', config),
+          axios.get('https://dhr-system.onrender.com/api/patient/records', config),
+          axios.get('https://dhr-system.onrender.com/api/patient/permissions', config),
+          axios.get('https://dhr-system.onrender.com/api/patient/requests', config)
         ]);
         setAppointments(apptsRes.data);
         setRecords(recordsRes.data);
@@ -76,7 +76,7 @@ const PatientDashboard = () => {
   const deleteAppointment = async (apptId) => {
     try {
       console.log('Deleting appointment:', apptId);
-      await axios.delete(`/api/patient/appointments/${apptId}`, {
+      await axios.delete(`https://dhr-system.onrender.com/api/patient/appointments/${apptId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setAppointments(appointments.filter(a => a._id !== apptId));
@@ -106,12 +106,12 @@ const PatientDashboard = () => {
 
   const handleRequestResponse = async (requestId, status) => {
     try {
-      const res = await axios.patch(`/api/patient/requests/${requestId}`, { status }, {
+      const res = await axios.patch(`https://dhr-system.onrender.com/api/patient/requests/${requestId}`, { status }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setIncomingRequests(incomingRequests.filter(r => r._id !== requestId));
       if (status === 'accepted') {
-        const permsRes = await axios.get('/api/patient/permissions', {
+        const permsRes = await axios.get('https://dhr-system.onrender.com/api/patient/permissions', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setPermissions(permsRes.data);
@@ -124,7 +124,7 @@ const PatientDashboard = () => {
 
   const revokePermission = async (doctorId) => {
     try {
-      await axios.delete(`/api/patient/permissions/${doctorId}`, {
+      await axios.delete(`https://dhr-system.onrender.com/api/patient/permissions/${doctorId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPermissions(permissions.filter(p => p.doctorId._id !== doctorId));
@@ -136,7 +136,7 @@ const PatientDashboard = () => {
   const deleteRecord = async (recordId) => {
     try {
       console.log('Deleting record:', recordId);
-      await axios.delete(`/api/patient/records/${recordId}`, {
+      await axios.delete(`https://dhr-system.onrender.com/api/patient/records/${recordId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRecords(records.filter(r => r._id !== recordId));
@@ -149,7 +149,7 @@ const PatientDashboard = () => {
 
   const handleRate = async () => {
     try {
-      await axios.post(`/api/patient/doctors/${showRatingModal.doctorId._id}/reviews`, {
+      await axios.post(`https://dhr-system.onrender.com/api/patient/doctors/${showRatingModal.doctorId._id}/reviews`, {
         appointmentId: showRatingModal._id,
         rating,
         punctuality,
