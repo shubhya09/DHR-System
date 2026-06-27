@@ -58,16 +58,14 @@ const Navbar = () => {
   };
 
   return (
-   <nav className="navbar">
-  <div className="nav-container">
-    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-      <Link to="/" className="nav-logo">
-        <img src={Logo} alt="Logo" />
-        &nbsp;MEDITRUST
-      </Link>
-    </div>
-  </div>
-
+    <nav className="navbar">
+      <div className="nav-container">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <Link to="/" className="nav-logo">
+            <img src="src/images/Logo.png" alt="Logo" />
+            &nbsp;MEDITRUST
+          </Link>
+        </div>
 
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰ Menu
