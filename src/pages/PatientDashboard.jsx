@@ -14,8 +14,7 @@ const PatientDashboard = () => {
   const [permissions, setPermissions] = useState([]);
   const [incomingRequests, setIncomingRequests] = useState([]);
   const [unreadCounts, setUnreadCounts] = useState({});
-  const userString = localStorage.getItem('user');
-  const user = userString ? JSON.parse(userString) : null;
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('token');
 
   const [selectedAppointmentForReceipt, setSelectedAppointmentForReceipt] = useState(null);
@@ -179,7 +178,7 @@ const PatientDashboard = () => {
       <div className="dashboard-grid">
         <aside className="sidebar">
           <h3>Patient Panel</h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--gray)', marginBottom: '1.5rem' }}>{`user?.profile?.fullName || 'Guest'`}</p>
+          <p style={{ fontSize: '0.9rem', color: 'var(--gray)', marginBottom: '1.5rem' }}>{user.profile.fullName}</p>
           <Link to="/patient-dashboard" className="sidebar-link active">Dashboard Overview</Link>
           <Link to="/book-appointment" className="sidebar-link">Book Appointment</Link>
           <Link to="/medical-records" className="sidebar-link">My Medical Records</Link>
