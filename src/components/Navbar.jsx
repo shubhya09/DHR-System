@@ -5,16 +5,21 @@ import Logo from '../images/Logo.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+
+  const userString = localStorage.getItem('user');
+  const user = userString ? JSON.parse(userString) : null;
+
   const [dbStatus, setDbStatus] = useState('checking');
   const [unreadTotal, setUnreadTotal] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-
   useEffect(() => {
     const checkHealth = async () => {
       try {
-        const res = await axios.get('/api/health');
+        const res = await axios.get(
+          'https://dhr-system.onrender.com/api/health'
+        );
+
         setDbStatus(res.data.database);
       } catch (err) {
         setDbStatus('failed');
@@ -23,12 +28,21 @@ const Navbar = () => {
 
     const fetchUnreadTotal = async () => {
       if (!user) return;
+
       try {
         const token = localStorage.getItem('token');
+
         if (!token) return;
-        const res = await axios.get('/api/chat/total-unread', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+
+        const res = await axios.get(
+          'https://dhr-system.onrender.com/api/chat/total-unread',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+
         setUnreadTotal(res.data.count);
       } catch (err) {
         console.error('Error fetching unread total:', err);
@@ -60,9 +74,15 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}
+        >
           <Link to="/" className="nav-logo">
-            <img src="src/images/Logo.png" alt="Logo" />
+            <img src={Logo} alt="Logo" />
             &nbsp;MEDITRUST
           </Link>
         </div>
@@ -72,28 +92,62 @@ const Navbar = () => {
         </button>
 
         <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
-          <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/#about" to="/" className="nav-link" onClick={() => setMenuOpen(false)}>About-Us</Link>
-          <Link href="/#services" to="/" className="nav-link" onClick={() => setMenuOpen(false)}>Our-Services</Link>
+          <Link
+            to="/"
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/#about"
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            About-Us
+          </Link>
+
+          <Link
+            to="/#services"
+            className="nav-link"
+            onClick={() => setMenuOpen(false)}
+          >
+            Our-Services
+          </Link>
 
           {!user ? (
             <>
-              <Link to="/login" className="btn-nav btn-Color" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/login"
+                className="btn-nav btn-Color"
+                onClick={() => setMenuOpen(false)}
+              >
                 Login
               </Link>
-              <Link to="/register" className="btn-nav btn-Color" onClick={() => setMenuOpen(false)}>
+
+              <Link
+                to="/register"
+                className="btn-nav btn-Color"
+                onClick={() => setMenuOpen(false)}
+              >
                 Register
               </Link>
             </>
           ) : (
             <>
               <Link
-                to={user.role === 'patient' ? '/patient-dashboard' : '/doctor-dashboard'}
+                to={
+                  user.role === 'patient'
+                    ? '/patient-dashboard'
+                    : '/doctor-dashboard'
+                }
                 className="nav-link"
                 style={{ position: 'relative' }}
                 onClick={() => setMenuOpen(false)}
               >
                 Dashboard
+
                 {unreadTotal > 0 && (
                   <span
                     style={{
@@ -106,7 +160,7 @@ const Navbar = () => {
                       borderRadius: '50%',
                       border: '1px solid white'
                     }}
-                  ></span>
+                  />
                 )}
               </Link>
 
@@ -115,7 +169,8 @@ const Navbar = () => {
                   handleLogout();
                   setMenuOpen(false);
                 }}
-                className="btn-nav btn-Color" >
+                className="btn-nav btn-Color"
+              >
                 Logout
               </button>
             </>
